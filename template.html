@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Запись к врачу</title>
+	<link rel="stylesheet" type="text/css" href="/static/st1.css">
+</head>
+<form method="GET" action="/searchRecord">
+	<input type="text" name="id" placeholder="Номер записи">
+	<input type="text" name="name" placeholder="ФИО">
+	<input type="date" name="birthdate" placeholder="Дата Рождения">
+	<input type="text" name="distr" placeholder="Участок">
+	<input type="text" name="addresses" placeholder="Адрес">
+	<input type="text" name="phone" placeholder="Телефон">
+	<input type="text" name="diagn" placeholder="Диагноз">
+	<input type="submit" value="Поиск">
+</form>
+<hr>
+<form method="POST" action="/addRecord">
+	<input type="text" name="name" placeholder="ФИО">
+	<input type="date" name="birthdate" placeholder="Дата Рождения">
+	<input type="text" name="distr" placeholder="Участок">
+	<input type="text" name="addresses" placeholder="Адрес">
+	<input type="text" name="phone" placeholder="Телефон">
+	<input type="text" name="diagn" placeholder="Диагноз">
+	<input type="submit" value="Добавить запись">
+</form>
+<hr>
+	<div style="overflow: auto;">
+	<table border="1" width="100%" cellpadding="5">
+	<tbody>
+		<tr>
+			<th>№</th>
+			<th>ФИО</th>
+			<th>Дата Рождения</th>
+			<th>Участок</th>
+			<th>Адрес Телефон</th>
+			<th>Диагноз</th>
+			<th>Удалить</th>
+		</tr>
+		%for i in records:
+		<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			<td>{{i[2]}}</td>
+			<td>{{i[3]}}</td>
+			<td>{{i[4]}} {{i[5]}} </td>
+			<td>{{i[6]}} </td>
+			<td>
+				<form method="POST" action="/delRecord">
+					<input type="hidden" name="id" value="{{i[0]}}">
+					<input type="submit" value="X">
+				</form>
+			</td>
+		</tr>
+		%end
+	</tbody>
+	</table>
+	</div>
+</html>
